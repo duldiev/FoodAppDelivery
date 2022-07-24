@@ -20,8 +20,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
         children: [
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: Dimensions.space45, bottom: Dimensions.space15),
-              padding: EdgeInsets.only(left: Dimensions.space20, right: Dimensions.space20),
+              margin: EdgeInsets.only(top: Dimensions.size45, bottom: Dimensions.size15),
+              padding: EdgeInsets.only(left: Dimensions.size20, right: Dimensions.size20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -38,20 +38,20 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   ),
                   Center(
                     child: Container(
-                      width: 45,
-                      height: 45,
+                      width: Dimensions.size45,
+                      height: Dimensions.size45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.radius15),
                         color: AppColors.mainColor,
                       ),
-                      child: const Icon(Icons.search, color: Colors.white,),
+                      child: Icon(Icons.search, color: Colors.white, size: Dimensions.size24,),
                     ),
                   )
                 ],
               ),
             ),
           ),
-          FoodPageBody(),
+          const FoodPageBody(),
         ],
       ),
     );

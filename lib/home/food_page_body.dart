@@ -87,7 +87,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           Container(
             height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: Dimensions.space10, right: Dimensions.space10,),
+            margin: EdgeInsets.only(left: Dimensions.size10, right: Dimensions.size10,),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
@@ -103,7 +103,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(left: Dimensions.space30, right: Dimensions.space30, bottom: Dimensions.space30),
+              margin: EdgeInsets.only(left: Dimensions.size30, right: Dimensions.size30, bottom: Dimensions.size30),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Colors.white,
@@ -125,27 +125,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
-                  top: Dimensions.space15,
-                  left: Dimensions.space15,
-                  right: Dimensions.space15,
+                  top: Dimensions.size15,
+                  left: Dimensions.size15,
+                  right: Dimensions.size15,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "Bitter Orange Marinade"),
-                    SizedBox(height: Dimensions.space10,),
+                    SizedBox(height: Dimensions.size10,),
                     Row(
                       children: [
                         Wrap(
                           children: List.generate(5, (index) => const Icon(Icons.star, color: AppColors.mainColor, size: 15,)),
                         ),
-                        SizedBox(width: Dimensions.space10,),
+                        SizedBox(width: Dimensions.size10,),
                         SmallText(text: "4.5"),
-                        SizedBox(width: Dimensions.space10,),
+                        SizedBox(width: Dimensions.size10,),
                         SmallText(text: "1023 comments"),
                       ],
                     ),
-                    SizedBox(height: Dimensions.space15,),
+                    SizedBox(height: Dimensions.size15,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [

@@ -9,11 +9,12 @@ class Dimensions {
   static double pageViewContainer = screenHeight / 3.84;
   static double pageViewTextContainer = screenHeight / 7.03;
 
-  static double space10 = screenHeight / 84.4;
-  static double space15 = screenHeight / 56.27;
-  static double space20 = screenHeight / 42.2;
-  static double space30 = screenHeight / 28.13;
-  static double space45 = screenHeight / 18.75;
+  static double size10 = screenHeight / 84.4;
+  static double size15 = screenHeight / 56.27;
+  static double size24 = screenHeight / 35.17;
+  static double size20 = screenHeight / 42.2;
+  static double size30 = screenHeight / 28.13;
+  static double size45 = screenHeight / 18.75;
 
   static double font12 = screenHeight / 70.33;
   static double font20 = screenHeight / 42.2;
