@@ -5,6 +5,7 @@ import 'package:food_delivery_app/widgets/bit_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // slider section
         Container(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -47,16 +49,29 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             itemBuilder: (context, position) { return _buildPageItem(position); },
           ),
         ),
+        // dots
         DotsIndicator(
           dotsCount: 5,
           position: _currentPageValue,
           decorator: DotsDecorator(
             color: Colors.grey, // Inactive color
             activeColor: AppColors.mainColor,
-            size: Size.square(Dimensions.size8),
-            activeSize: Size.square(Dimensions.size10),
+            size: Size.square(Dimensions.height(8)),
+            activeSize: Size.square(Dimensions.height(10)),
           ),
         ),
+        // popular text
+        SizedBox(height: Dimensions.height(30),),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width(30)),
+          child: Row(
+            children: [
+              BigText(text: "Popular"),
+              SizedBox(width: Dimensions.width(10),),
+
+            ],
+          ),
+        )
       ],
     );
   }
@@ -89,9 +104,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           Container(
             height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: Dimensions.size10, right: Dimensions.size10,),
+            margin: EdgeInsets.only(left: Dimensions.height(10), right: Dimensions.height(10),),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                borderRadius: BorderRadius.circular(Dimensions.radius(30)),
                 color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
                 // image: const DecorationImage(
                 //   fit: BoxFit.cover,
@@ -105,9 +120,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(left: Dimensions.size30, right: Dimensions.size30, bottom: Dimensions.size30),
+              margin: EdgeInsets.only(left: Dimensions.height(30), right: Dimensions.height(30), bottom: Dimensions.height(30)),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                borderRadius: BorderRadius.circular(Dimensions.radius(20)),
                 color: Colors.white,
                 boxShadow: const [
                   BoxShadow(
@@ -127,27 +142,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
-                  top: Dimensions.size15,
-                  left: Dimensions.size15,
-                  right: Dimensions.size15,
+                  top: Dimensions.height(15),
+                  left: Dimensions.height(15),
+                  right: Dimensions.height(15),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "Bitter Orange Marinade"),
-                    SizedBox(height: Dimensions.size10,),
+                    SizedBox(height: Dimensions.height(10),),
                     Row(
                       children: [
                         Wrap(
-                          children: List.generate(5, (index) => Icon(Icons.star, color: AppColors.mainColor, size: Dimensions.size15,)),
+                          children: List.generate(5, (index) => Icon(Icons.star, color: AppColors.mainColor, size: Dimensions.height(15),)),
                         ),
-                        SizedBox(width: Dimensions.size10,),
-                        SmallText(text: "4.5"),
-                        SizedBox(width: Dimensions.size10,),
-                        SmallText(text: "1023 comments"),
+                        SizedBox(width: Dimensions.width(10),),
+                        const SmallText(text: "4.5"),
+                        SizedBox(width: Dimensions.width(10),),
+                        const SmallText(text: "1023 comments"),
                       ],
                     ),
-                    SizedBox(height: Dimensions.size15,),
+                    SizedBox(height: Dimensions.height(15),),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [

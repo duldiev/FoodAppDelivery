@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SmallText extends StatelessWidget {
-  Color color;
+  final Color color;
   final String text;
-  double size;
-  double height;
+  final double size;
+  final double height;
 
-  SmallText({
+  const SmallText({
     Key? key,
     this.color = const Color(0xFFccc7c5),
     required this.text,
@@ -23,7 +22,7 @@ class SmallText extends StatelessWidget {
       text,
       style: GoogleFonts.roboto(
         color: color,
-        fontSize: size == 0 ? Dimensions.font12 : size,
+        fontSize: size == 0 ? Dimensions.font(12) : size,
         height: height,
       ),
     );

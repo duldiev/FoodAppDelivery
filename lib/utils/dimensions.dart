@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Dimensions {
@@ -9,19 +8,19 @@ class Dimensions {
   static double pageViewContainer = screenHeight / 3.84;
   static double pageViewTextContainer = screenHeight / 7.03;
 
-  static double size5 = screenHeight / 168.8;
-  static double size8 = screenHeight / 105.5;
-  static double size10 = screenHeight / 84.4;
-  static double size15 = screenHeight / 56.27;
-  static double size24 = screenHeight / 35.17;
-  static double size20 = screenHeight / 42.2;
-  static double size30 = screenHeight / 28.13;
-  static double size45 = screenHeight / 18.75;
+  static double height(double size) {
+    return screenHeight / (844 / size);
+  }
 
-  static double font12 = screenHeight / 70.33;
-  static double font20 = screenHeight / 42.2;
+  static double width(double size) {
+    return screenWidth / (390 / size);
+  }
 
-  static double radius20 = screenHeight / 42.2;
-  static double radius15 = screenHeight / 56.27;
-  static double radius30 = screenHeight / 28.13;
+  static double font(double size) {
+    return screenHeight / (844 / size);
+  }
+
+  static double radius(double size) {
+    return screenHeight / (844 / size);
+  }
 }
