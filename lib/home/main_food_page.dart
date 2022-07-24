@@ -31,7 +31,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                       Row(
                         children: [
                           SmallText(text: "City", color: Colors.black54,),
-                          const Icon(Icons.arrow_drop_down_rounded),
+                          Icon(Icons.arrow_drop_down_rounded, size: Dimensions.size24,),
                         ],
                       ),
                     ],

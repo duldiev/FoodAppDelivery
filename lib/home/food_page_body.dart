@@ -50,9 +50,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         DotsIndicator(
           dotsCount: 5,
           position: _currentPageValue,
-          decorator: const DotsDecorator(
+          decorator: DotsDecorator(
             color: Colors.grey, // Inactive color
             activeColor: AppColors.mainColor,
+            size: Size.square(Dimensions.size8),
+            activeSize: Size.square(Dimensions.size10),
           ),
         ),
       ],
@@ -91,12 +93,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                      ""
-                  ),
-                )
+                // image: const DecorationImage(
+                //   fit: BoxFit.cover,
+                //   image: AssetImage(
+                //       ""
+                //   ),
+                // )
             ),
           ),
           Align(
@@ -137,7 +139,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     Row(
                       children: [
                         Wrap(
-                          children: List.generate(5, (index) => const Icon(Icons.star, color: AppColors.mainColor, size: 15,)),
+                          children: List.generate(5, (index) => Icon(Icons.star, color: AppColors.mainColor, size: Dimensions.size15,)),
                         ),
                         SizedBox(width: Dimensions.size10,),
                         SmallText(text: "4.5"),
