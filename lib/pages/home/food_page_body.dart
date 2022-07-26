@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
+import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/bit_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
@@ -60,19 +61,104 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: Size.square(Dimensions.height(10)),
           ),
         ),
-        // popular text
+        // Popular text
         SizedBox(height: Dimensions.height(30),),
         Container(
           margin: EdgeInsets.only(left: Dimensions.width(30)),
           child: Row(
             children: [
-              BigText(text: "Popular"),
+              const BigText(text: "Popular"),
               SizedBox(width: Dimensions.width(10),),
-
+              Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: const BigText(text: ".", color: Colors.black26,),
+              ),
+              SizedBox(width: Dimensions.width(10),),
+              Container(
+                margin: const EdgeInsets.only(top: 3),
+                child: const SmallText(text: "Food pairing",),
+              )
             ],
           ),
-        )
+        ),
+        // List of food and images
+        ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) => _buildListView(index),
+        ),
       ],
+    );
+  }
+
+  Widget _buildListView(int index) {
+    return Container(
+      margin: EdgeInsets.only(left: Dimensions.width(20), right: Dimensions.width(20), bottom: Dimensions.height(10)),
+      child: Row(
+        children: [
+          // Image section
+          Container(
+            width: Dimensions.height(120),
+            height: Dimensions.height(120),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius(20)),
+              color: Colors.red,
+              // image: DecorationImage(
+              //   image: AssetImage(
+              //     "",
+              //   )
+              // ),
+            ),
+          ),
+          // Text section
+          Expanded(
+            child: Container(
+              height: Dimensions.height(100),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(Dimensions.radius(20)),
+                  bottomRight: Radius.circular(Dimensions.radius(20)),
+                ),
+                color: Colors.red,
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: Dimensions.width(10), right: Dimensions.width(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const BigText(text: "Nutritious fruit mean in China"),
+                    SizedBox(height: Dimensions.height(10),),
+                    const SmallText(text: "With chinese characteristics"),
+                    SizedBox(height: Dimensions.height(10),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        IconAndTextWidget(
+                          icon: Icons.circle,
+                          text: "Normal",
+                          iconColor: AppColors.iconColor1,
+                        ),
+                        IconAndTextWidget(
+                          icon: Icons.location_on,
+                          text: "1.7km",
+                          iconColor: AppColors.mainColor,
+                        ),
+                        IconAndTextWidget(
+                          icon: Icons.access_time_rounded,
+                          text: "32min",
+                          iconColor: AppColors.iconColor2,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -146,45 +232,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   left: Dimensions.height(15),
                   right: Dimensions.height(15),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "Bitter Orange Marinade"),
-                    SizedBox(height: Dimensions.height(10),),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(5, (index) => Icon(Icons.star, color: AppColors.mainColor, size: Dimensions.height(15),)),
-                        ),
-                        SizedBox(width: Dimensions.width(10),),
-                        const SmallText(text: "4.5"),
-                        SizedBox(width: Dimensions.width(10),),
-                        const SmallText(text: "1023 comments"),
-                      ],
-                    ),
-                    SizedBox(height: Dimensions.height(15),),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        IconAndTextWidget(
-                          icon: Icons.circle,
-                          text: "Normal",
-                          iconColor: AppColors.iconColor1,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on,
-                          text: "1.7km",
-                          iconColor: AppColors.mainColor,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          text: "32min",
-                          iconColor: AppColors.iconColor2,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                child: const AppColumn(text: "Bitter Orange Marinade",),
               ),
             ),
           ),
