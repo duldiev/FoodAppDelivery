@@ -46,7 +46,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                       ),
                       child: Icon(Icons.search, color: Colors.white, size: Dimensions.height(24),),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
