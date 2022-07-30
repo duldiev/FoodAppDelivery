@@ -6,7 +6,6 @@ import 'package:food_delivery_app/widgets/bit_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -83,7 +82,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
         // List of food and images
         ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: 10,
           itemBuilder: (context, index) => _buildListView(index),

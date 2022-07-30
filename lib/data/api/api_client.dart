@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class APIClient extends GetConnect implements GetxService {
@@ -14,5 +12,14 @@ class APIClient extends GetConnect implements GetxService {
       'Content-type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     };
+  }
+
+  Future<Response> getData(String uri) async {
+    try {
+      Response response = await get(uri);
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
   }
 }
