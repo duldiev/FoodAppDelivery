@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/data/repository/popular_product_repo.dart';
+import 'package:food_delivery_app/models/products.dart';
 import 'package:get/get.dart';
 
 class PopularProductController extends GetxController {
@@ -8,6 +9,9 @@ class PopularProductController extends GetxController {
   List<dynamic> _popularProductList = [];
   List<dynamic> get popularProductList => _popularProductList;
 
+  bool _isLoad = false;
+  bool get isLoad => _isLoad;
+
   PopularProductController({required this.popularProductRepo});
 
   Future<void> getPopularProductList() async {
@@ -15,7 +19,8 @@ class PopularProductController extends GetxController {
 
     if (response.statusCode == 200) {
       _popularProductList = [];
-      // _popularProductList.addAll();
+      _popularProductList.addAll(Product.fromJson(response.body).products);
+      _isLoad = true;
       update();
     } else {
 
