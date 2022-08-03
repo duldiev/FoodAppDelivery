@@ -7,6 +7,7 @@ class SmallText extends StatelessWidget {
   final String text;
   final double size;
   final double height;
+  final TextOverflow? overflow;
 
   const SmallText({
     Key? key,
@@ -14,12 +15,14 @@ class SmallText extends StatelessWidget {
     required this.text,
     this.size = 0,
     this.height = 1.2,
+    this.overflow,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: overflow,
       style: GoogleFonts.roboto(
         color: color,
         fontSize: size == 0 ? Dimensions.font(12) : size,
