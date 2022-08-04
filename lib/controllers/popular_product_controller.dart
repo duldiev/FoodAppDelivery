@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:food_delivery_app/data/repository/popular_product_repo.dart';
 import 'package:food_delivery_app/models/products.dart';
 import 'package:get/get.dart';
+
+import '../utils/colors.dart';
 
 class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
@@ -30,7 +33,16 @@ class PopularProductController extends GetxController {
   }
 
   void setQuantity(bool isIncrement) {
-    _quantity = _quantity + (isIncrement ? (_quantity < 20 ? 1 : 0) : (_quantity - 1 >= 0 ? -1 : 0));
+    _quantity = _quantity + (isIncrement ? (_quantity < 20 ? 1 : _zeroWithSnackbar("add")) : (_quantity - 1 >= 0 ? -1 : _zeroWithSnackbar("reduce")));
     update();
+  }
+
+  int _zeroWithSnackbar(String text) {
+    Get.snackbar(
+      "Item count", "You can't $text more!",
+      backgroundColor: AppColors.mainColor,
+      colorText: Colors.white,
+    );
+    return 0;
   }
 }
