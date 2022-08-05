@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:food_delivery_app/data/repository/popular_product_repo.dart';
 import 'package:food_delivery_app/models/products.dart';
 import 'package:get/get.dart';
 import '../data/repository/recommended_product_repo.dart';
@@ -24,7 +22,7 @@ class RecommendedProductController extends GetxController {
       _isLoad = true;
       update();
     } else {
-
+      print("Couldn't load");
     }
   }
 }

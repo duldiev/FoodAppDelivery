@@ -17,6 +17,9 @@ class PopularProductController extends GetxController {
   int _quantity = 0;
   String get quantity => _quantity.toString();
 
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
+
   PopularProductController({required this.popularProductRepo});
 
   Future<void> getPopularProductList() async {
@@ -44,5 +47,12 @@ class PopularProductController extends GetxController {
       colorText: Colors.white,
     );
     return 0;
+  }
+
+  void initProduct() {
+    _quantity = 0;
+    _inCartItems = 0;
+    // if exists
+    // get from storage _inCartItems = 3
   }
 }

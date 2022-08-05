@@ -11,7 +11,6 @@ import 'package:food_delivery_app/widgets/icon_and_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:get/get.dart';
-
 import '../../models/products.dart';
 
 class FoodPageBody extends StatefulWidget {
