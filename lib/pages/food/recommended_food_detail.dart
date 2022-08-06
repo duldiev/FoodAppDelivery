@@ -8,6 +8,7 @@ import 'package:food_delivery_app/widgets/bit_text.dart';
 import 'package:food_delivery_app/widgets/expandable_text.dart';
 import 'package:get/get.dart';
 import '../../models/products.dart';
+import '../../routes/route_helper.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
@@ -15,7 +16,7 @@ class RecommendedFoodDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Products recommendedProduct = Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    ProductModel recommendedProduct = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -28,7 +29,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.toNamed(RouteHelper.initial);
                   },
                   child: AppIcon(icon: Icons.clear, size: Dimensions.iconSize(30),),
                 ),

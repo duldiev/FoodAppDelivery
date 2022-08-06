@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
+import 'package:food_delivery_app/models/products.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/utils/fetch_image.dart';
@@ -9,18 +11,16 @@ import 'package:get/get.dart';
 import '../../utils/colors.dart';
 import '../../widgets/app_column.dart';
 import '../../widgets/bit_text.dart';
-import 'package:food_delivery_app/models/products.dart';
+import 'package:food_delivery_app/helper/dependencies.dart' as dep;
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
   const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
-  final String longText = """Sense child do state to defer mr of forty. Become latter but nor abroad wisdom waited. Was delivered gentleman acuteness but daughters. In as of whole as match asked. Pleasure exertion put add entrance distance drawings. In equally matters showing greatly it as. Want name any wise are able park when. Saw vicinity judgment remember finished men throwing. For norland produce age wishing. To figure on it spring season up. Her provision acuteness had excellent two why intention. As called mr needed praise at. Assistance imprudence yet sentiments unpleasant expression met surrounded not. Be at talked ye though secure nearer. She suspicion dejection saw instantly. Well deny may real one told yet saw hard dear. Bed chief house rapid right the. Set noisy one state tears which. No girl oh part must fact high my he. Simplicity in excellence melancholy as remarkably discovered. Own partiality motionless was old excellence she inquietude contrasted. Sister giving so wicket cousin of an he rather marked. Of on game part body rich. Adapted mr savings venture it or comfort affixed friends. Carried nothing on am warrant towards. Polite in of in oh needed itself silent course. Assistance travelling so especially do prosperous appearance mr no celebrated. Wanted easily in my called formed suffer. Songs hoped sense as taken ye mirth at. Believe fat how six drawing pursuit minutes far. Same do seen head am part it dear open to. Whatever may scarcely judgment had. Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship. No in he real went find mr. Wandered or strictly raillery stanhill as. Jennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now how nay cold real case.""";
-
   @override
   Widget build(BuildContext context) {
-    Products popularProduct = Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct();
+    var popularProduct = Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>().initProduct(Get.find<CartController>(), popularProduct);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -53,15 +53,19 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.toNamed(RouteHelper.initial);
                   },
                   child: const AppIcon(icon: Icons.arrow_back_ios),
                 ),
-                GestureDetector(
-                  onTap: () {
-
-                  },
-                  child: const AppIcon(icon: Icons.shopping_cart_outlined),),
+                GetBuilder<PopularProductController>(builder: (popularProduct) {
+                  return Stack(
+                    children: [
+                      const AppIcon(icon: Icons.shopping_cart_outlined,),
+                      popularProduct.totalItems > 0 ? _counterIcon() : Container(),
+                      popularProduct.totalItems > 0 ? _counterValue(popularProduct.totalItems) : Container(),
+                    ],
+                  );
+                },),
               ],
             ),
           ),
@@ -138,7 +142,7 @@ class PopularFoodDetail extends StatelessWidget {
                       child: const Icon(Icons.remove, color: AppColors.signColor,),
                     ),
                     SizedBox(width: Dimensions.height(10) / 2,),
-                    BigText(text: popularProductController.quantity),
+                    BigText(text: popularProductController.inCartItems.toString()),
                     SizedBox(width: Dimensions.height(10) / 2,),
                     GestureDetector(
                       onTap: () {
@@ -160,15 +164,45 @@ class PopularFoodDetail extends StatelessWidget {
                   color: AppColors.mainColor,
                   borderRadius: BorderRadius.circular(Dimensions.radius(20)),
                 ),
-                child: BigText(
-                  text: "\$${popularProduct.price} | Add to cart",
-                  color: Colors.white,
+                child: GestureDetector(
+                  onTap: () {
+                    popularProductController.addItem(popularProduct);
+                  },
+                  child: BigText(
+                    text: "\$${popularProduct.price} | Add to cart",
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
           ),
         );
       },),
+    );
+  }
+
+  Positioned _counterIcon() {
+    return Positioned(
+      right: 2,
+      top: 2,
+      child: AppIcon(
+        icon: Icons.circle,
+        size: Dimensions.iconSize(18),
+        iconColor: Colors.transparent,
+        backgroundColor: AppColors.mainColor,
+      ),
+    );
+  }
+
+  Positioned _counterValue(int totalItems) {
+    return Positioned(
+      right: totalItems > 9 ? 4 : 8,
+      top: 4,
+      child: BigText(
+        text: totalItems.toString(),
+        size: Dimensions.font(12),
+        color: Colors.white,
+      )
     );
   }
 }

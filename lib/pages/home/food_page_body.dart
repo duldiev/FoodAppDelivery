@@ -113,7 +113,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildListView(int index, Products recommendedProduct) {
+  Widget _buildListView(int index, ProductModel recommendedProduct) {
     return GestureDetector(
       onTap: () {
         Get.toNamed(RouteHelper.getRecommendedFood(index));
@@ -189,7 +189,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index, Products popularProduct) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
     Matrix4 matrix = Matrix4.identity();
 
     if (index == _currentPageValue.floor()) {

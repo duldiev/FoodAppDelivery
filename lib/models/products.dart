@@ -2,9 +2,9 @@ class Product {
   int? _totalSize;
   int? _typeId;
   int? _offset;
-  late List<Products> _products;
+  late List<ProductModel> _products;
 
-  List<Products> get products => _products;
+  List<ProductModel> get products => _products;
 
   Product({required totalSize, required typeId, required offset, required products}) {
     _totalSize = totalSize;
@@ -18,9 +18,9 @@ class Product {
     _typeId = json['type_id'];
     _offset = json['offset'];
     if (json['products'] != null) {
-      _products = <Products>[];
+      _products = <ProductModel>[];
       json['products'].forEach((v) {
-        _products.add(Products.fromJson(v));
+        _products.add(ProductModel.fromJson(v));
       });
     }
   }
@@ -35,7 +35,7 @@ class Product {
   }
 }
 
-class Products {
+class ProductModel {
   int? id;
   String? name;
   String? description;
@@ -47,7 +47,7 @@ class Products {
   String? updatedAt;
   int? typeId;
 
-  Products(
+  ProductModel(
       {this.id,
         this.name,
         this.description,
@@ -59,7 +59,7 @@ class Products {
         this.updatedAt,
         this.typeId});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
