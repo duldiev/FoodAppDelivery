@@ -38,7 +38,11 @@ class PopularProductController extends GetxController {
   }
 
   void setQuantity(bool isIncrement) {
-    _quantity = _quantity + (isIncrement ? ((_inCartItems + _quantity) + 1 < 20 ? 1 : _zeroWithSnackbar("add")) : ((_inCartItems + _quantity) - 1 >= 0 ? -1 : _zeroWithSnackbar("reduce")));
+    if (isIncrement)
+      print("Increment ${_quantity}");
+    else
+      print("Decrement ${_quantity}");
+    _quantity = _quantity + (isIncrement ? ((_inCartItems + _quantity) + 1 <= 20 ? 1 : _zeroWithSnackbar("add")) : ((_inCartItems + _quantity) - 1 >= 0 ? -1 : _zeroWithSnackbar("reduce")));
     update();
   }
 
@@ -48,6 +52,10 @@ class PopularProductController extends GetxController {
       backgroundColor: AppColors.mainColor,
       colorText: Colors.white,
     );
+    if (text == "add") return 0;
+    if (_inCartItems > 0) {
+      return _quantity = -_inCartItems;
+    }
     return 0;
   }
 

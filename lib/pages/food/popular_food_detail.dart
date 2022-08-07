@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
-import 'package:food_delivery_app/models/products.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/utils/fetch_image.dart';
@@ -11,7 +10,6 @@ import 'package:get/get.dart';
 import '../../utils/colors.dart';
 import '../../widgets/app_column.dart';
 import '../../widgets/bit_text.dart';
-import 'package:food_delivery_app/helper/dependencies.dart' as dep;
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
@@ -153,21 +151,21 @@ class PopularFoodDetail extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(
-                  top: Dimensions.height(10),
-                  bottom: Dimensions.height(10),
-                  left: Dimensions.width(10),
-                  right: Dimensions.width(10),
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.mainColor,
-                  borderRadius: BorderRadius.circular(Dimensions.radius(20)),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    popularProductController.addItem(popularProduct);
-                  },
+              GestureDetector(
+                onTap: () {
+                  popularProductController.addItem(popularProduct);
+                },
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height(10),
+                    bottom: Dimensions.height(10),
+                    left: Dimensions.width(10),
+                    right: Dimensions.width(10),
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.mainColor,
+                    borderRadius: BorderRadius.circular(Dimensions.radius(20)),
+                  ),
                   child: BigText(
                     text: "\$${popularProduct.price} | Add to cart",
                     color: Colors.white,
