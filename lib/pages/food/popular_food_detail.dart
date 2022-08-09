@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
+import 'package:food_delivery_app/pages/cart/cart_page.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/utils/fetch_image.dart';
@@ -55,13 +56,20 @@ class PopularFoodDetail extends StatelessWidget {
                   },
                   child: const AppIcon(icon: Icons.arrow_back_ios),
                 ),
-                GetBuilder<PopularProductController>(builder: (popularProduct) {
-                  return Stack(
-                    children: [
-                      const AppIcon(icon: Icons.shopping_cart_outlined,),
-                      popularProduct.totalItems > 0 ? _counterIcon() : Container(),
-                      popularProduct.totalItems > 0 ? _counterValue(popularProduct.totalItems) : Container(),
-                    ],
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (controller.totalItems > 0) {
+                        Get.toNamed(RouteHelper.getCartPage());
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        const AppIcon(icon: Icons.shopping_cart_outlined,),
+                        controller.totalItems > 0 ? _counterIcon() : Container(),
+                        controller.totalItems > 0 ? _counterValue(controller.totalItems) : Container(),
+                      ],
+                    ),
                   );
                 },),
               ],
@@ -101,7 +109,7 @@ class PopularFoodDetail extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProductController) {
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (controller) {
         return Container(
           height: Dimensions.height(120),
           padding: EdgeInsets.only(
@@ -135,16 +143,16 @@ class PopularFoodDetail extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        popularProductController.setQuantity(false);
+                        controller.setQuantity(false);
                       },
                       child: const Icon(Icons.remove, color: AppColors.signColor,),
                     ),
                     SizedBox(width: Dimensions.height(10) / 2,),
-                    BigText(text: popularProductController.inCartItems.toString()),
+                    BigText(text: controller.inCartItems.toString()),
                     SizedBox(width: Dimensions.height(10) / 2,),
                     GestureDetector(
                       onTap: () {
-                        popularProductController.setQuantity(true);
+                        controller.setQuantity(true);
                       },
                       child: const Icon(Icons.add, color: AppColors.signColor),
                     ),
@@ -153,7 +161,7 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  popularProductController.addItem(popularProduct);
+                  controller.addItem(popularProduct);
                 },
                 child: Container(
                   padding: EdgeInsets.only(

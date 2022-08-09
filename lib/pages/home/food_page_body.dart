@@ -101,7 +101,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: recommendedProductController.recommendedProductList.length,
-              itemBuilder: (context, index) => _buildListView(index, recommendedProductController.recommendedProductList[index]),
+              itemBuilder: (context, index) => _buildListItem(index, recommendedProductController.recommendedProductList[index]),
             );
           } else {
             return const CircularProgressIndicator(
@@ -113,7 +113,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildListView(int index, ProductModel recommendedProduct) {
+  Widget _buildListItem(int index, ProductModel recommendedProduct) {
     return GestureDetector(
       onTap: () {
         Get.toNamed(RouteHelper.getRecommendedFood(index));

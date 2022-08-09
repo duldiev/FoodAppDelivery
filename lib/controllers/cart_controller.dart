@@ -3,10 +3,9 @@ import 'package:food_delivery_app/data/repository/cart_repo.dart';
 import 'package:food_delivery_app/models/cart.dart';
 import '../models/products.dart';
 import 'package:get/get.dart';
-
 import '../utils/colors.dart';
 
-class CartController {
+class CartController extends GetxController {
   final CartRepo cartRepo;
 
   CartController({required this.cartRepo});
@@ -29,6 +28,7 @@ class CartController {
           quantity: value.quantity! + quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
 
@@ -47,6 +47,7 @@ class CartController {
             quantity: quantity,
             isExist: true,
             time: DateTime.now().toString(),
+            product: product,
           );
         });
       } else {
@@ -57,6 +58,7 @@ class CartController {
         );
       }
     }
+    update();
   }
 
   bool isExist(ProductModel product) {
@@ -93,4 +95,6 @@ class CartController {
       return e.value;
     }).toList();
   }
+
+
 }

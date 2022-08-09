@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
     Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const CartPage(),
-      // initialRoute: RouteHelper.getInitial(),
-      // getPages: RouteHelper.routes,
+      home: const MainFoodPage(),
+      initialRoute: RouteHelper.getInitial(),
+        getPages: RouteHelper.routes,
     );
   }
 }

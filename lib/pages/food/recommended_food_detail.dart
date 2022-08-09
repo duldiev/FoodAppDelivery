@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:food_delivery_app/controllers/recommended_product_controller.dart';
+import 'package:food_delivery_app/pages/cart/cart_page.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/utils/fetch_image.dart';
@@ -37,13 +38,20 @@ class RecommendedFoodDetail extends StatelessWidget {
                   },
                   child: AppIcon(icon: Icons.clear, size: Dimensions.iconSize(30),),
                 ),
-                GetBuilder<PopularProductController>(builder: (popularProduct) {
-                  return Stack(
-                    children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined, size: Dimensions.iconSize(30),),
-                      popularProduct.totalItems > 0 ? _counterIcon() : Container(),
-                      popularProduct.totalItems > 0 ? _counterValue(popularProduct.totalItems) : Container(),
-                    ],
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (controller.totalItems > 0) {
+                        Get.toNamed(RouteHelper.getCartPage());
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined, size: Dimensions.iconSize(30),),
+                        controller.totalItems > 0 ? _counterIcon() : Container(),
+                        controller.totalItems > 0 ? _counterValue(controller.totalItems) : Container(),
+                      ],
+                    ),
                   );
                 },),
               ],
@@ -86,7 +94,7 @@ class RecommendedFoodDetail extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct) {
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (controller) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -102,7 +110,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      popularProduct.setQuantity(false);
+                      controller.setQuantity(false);
                     },
                     child: AppIcon(
                       icon: Icons.remove,
@@ -112,13 +120,13 @@ class RecommendedFoodDetail extends StatelessWidget {
                     ),
                   ),
                   BigText(
-                    text: "\$${recommendedProduct.price} x ${popularProduct.inCartItems}",
+                    text: "\$${recommendedProduct.price} x ${controller.inCartItems}",
                     size: Dimensions.font(22),
                     color: AppColors.mainBlackColor,
                   ),
                   GestureDetector(
                     onTap: () {
-                      popularProduct.setQuantity(true);
+                      controller.setQuantity(true);
                     },
                     child: AppIcon(
                       icon: Icons.add,
@@ -166,7 +174,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      popularProduct.addItem(recommendedProduct);
+                      controller.addItem(recommendedProduct);
                     },
                     child: Container(
                       padding: EdgeInsets.only(
