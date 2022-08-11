@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
-import 'package:food_delivery_app/pages/splash/splash_screen.dart';
+import 'package:food_delivery_app/controllers/recommended_product_controller.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:get/get.dart';
-import 'controllers/recommended_product_controller.dart';
 import 'helper/dependencies.dart' as dep;
 
 Future<void> main() async {
@@ -18,13 +17,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-      // initialRoute: RouteHelper.getInitial(),
-      getPages: RouteHelper.routes,
-    );
+    return GetBuilder<PopularProductController>(builder: (_) {
+      return GetBuilder<RecommendedProductController>(builder: (_) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: RouteHelper.getSplashPage(),
+          getPages: RouteHelper.routes,
+        );
+      });
+    });
   }
 }

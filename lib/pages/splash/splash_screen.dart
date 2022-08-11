@@ -1,4 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
+import 'package:food_delivery_app/utils/dimensions.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/popular_product_controller.dart';
+import '../../controllers/recommended_product_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -11,11 +18,21 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   late Animation<double> _animation;
   late AnimationController _controller;
 
+  Future<void> _loadResource() async {
+    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  }
+
   @override
   void initState() {
     super.initState();
+
+    _loadResource();
+
     _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..forward();
     _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+
+    Timer(const Duration(seconds: 3), () => Get.offNamed(RouteHelper.getInitial()),);
   }
 
   @override
@@ -29,14 +46,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
             scale: _animation,
             child: Center(
               child: Image.asset(
-                width: 250,
+                width: Dimensions.height(250),
                 "assets/images/Splash-Logo-Part-1.png",
               ),
             ),
           ),
           Center(
             child: Image.asset(
-              width: 250,
+              width: Dimensions.height(250),
               "assets/images/Splash-Logo-Part-2.png",
             ),
           ),

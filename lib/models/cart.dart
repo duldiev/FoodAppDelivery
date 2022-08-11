@@ -38,6 +38,9 @@ class CartModel {
     data['name'] = name;
     data['price'] = price;
     data['img'] = img;
+    data['quantity'] = quantity;
+    data['isExist'] = isExist;
+    data['time'] = time;
     return data;
   }
 }

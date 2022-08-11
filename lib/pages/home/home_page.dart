@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
 import 'package:food_delivery_app/utils/colors.dart';
+import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
+      navBarHeight: Dimensions.height(70),
       confineInSafeArea: true,
       backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
@@ -78,28 +80,28 @@ class _HomePageState extends State<HomePage> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
+        icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainColor,
+        inactiveColorPrimary: Colors.amberAccent,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.archivebox_fill),
+        icon: const Icon(CupertinoIcons.archivebox_fill),
         title: ("Archive"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainColor,
+        inactiveColorPrimary: Colors.amberAccent,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.cart_fill),
+        icon: const Icon(CupertinoIcons.cart_fill),
         title: ("Cart"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainColor,
+        inactiveColorPrimary: Colors.amberAccent,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.person),
+        icon: const Icon(CupertinoIcons.person),
         title: ("Profile"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: AppColors.mainColor,
+        inactiveColorPrimary: Colors.amberAccent,
       ),
     ];
   }

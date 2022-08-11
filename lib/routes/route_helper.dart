@@ -2,6 +2,7 @@ import 'package:food_delivery_app/pages/food/popular_food_detail.dart';
 import 'package:food_delivery_app/pages/food/recommended_food_detail.dart';
 import 'package:food_delivery_app/pages/home/home_page.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
+import 'package:food_delivery_app/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';
 import '../pages/cart/cart_page.dart';
 
@@ -10,11 +11,13 @@ class RouteHelper {
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/cart-page";
+  static const String splashPage = "/splash-page";
 
   static String getInitial() => initial;
   static String getPopularFood(int pageId, String page) => "$popularFood?pageId=$pageId&page=$page";
   static String getRecommendedFood(int pageId, String page) => "$recommendedFood?pageId=$pageId&page=$page";
-  static String getCartPage() => "$cartPage";
+  static String getCartPage() => cartPage;
+  static String getSplashPage() => splashPage;
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => const HomePage(),),
@@ -40,5 +43,12 @@ class RouteHelper {
       page: () {
         return const CartPage();
       },),
+    GetPage(
+      name: splashPage,
+      transition: Transition.fadeIn,
+      page: () {
+        return const SplashScreen();
+      },),
+
   ];
 }
