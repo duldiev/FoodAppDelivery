@@ -116,7 +116,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget _buildListItem(int index, ProductModel recommendedProduct) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteHelper.getRecommendedFood(index));
+        Get.toNamed(RouteHelper.getRecommendedFood(index, 'home'));
       },
       child: Container(
         margin: EdgeInsets.only(left: Dimensions.width(20), right: Dimensions.width(20), bottom: Dimensions.height(10)),
@@ -215,7 +215,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(RouteHelper.getPopularFood(index));
+          Get.toNamed(RouteHelper.getPopularFood(index, 'home'));
         },
         child: Stack(
           children: [
