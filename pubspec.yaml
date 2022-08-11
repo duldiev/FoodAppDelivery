@@ -34,7 +34,7 @@ dependencies:
   google_fonts: ^3.0.1
   dots_indicator: ^2.1.0
   get: ^4.6.5
-  persistent_bottom_nav_bar: ^4.0.2
+  persistent_bottom_nav_bar_v2: ^4.2.4
 
 
 dev_dependencies:
@@ -65,8 +65,8 @@ flutter:
     - assets/images/food2.jpg
     - assets/images/food3.jpg
     - assets/images/food4.jpg
-    - assets/images/Spash-Logo-Part-1.jpg
-    - assets/images/Spash-Logo-Part-1.jpg
+    - assets/images/Splash-Logo-Part-1.png
+    - assets/images/Splash-Logo-Part-2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

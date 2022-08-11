@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,17 +14,31 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..forward();
     _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/images/Splash-Logo-Part-1.jpg",
+          ScaleTransition(
+            scale: _animation,
+            child: Center(
+              child: Image.asset(
+                width: 250,
+                "assets/images/Splash-Logo-Part-1.png",
+              ),
+            ),
+          ),
+          Center(
+            child: Image.asset(
+              width: 250,
+              "assets/images/Splash-Logo-Part-2.png",
+            ),
           ),
         ],
       ),
