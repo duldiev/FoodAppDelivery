@@ -11,15 +11,16 @@ class CartController extends GetxController {
   CartController({required this.cartRepo});
 
   Map<int, CartModel> _items = {};
-
   Map<int, CartModel> get items => _items;
+
+  // for storage and shared preferences
+  List<CartModel> storageItems = [];
 
   void addItem(ProductModel product, int quantity) {
     var totalQuantity = 0;
     if (_items.containsKey(product.id!)) {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
-
         return CartModel(
           id: value.id,
           name: value.name,
@@ -38,7 +39,7 @@ class CartController extends GetxController {
     } else {
       if (quantity > 0) {
         _items.putIfAbsent(product.id!, () {
-          print("Product ID: " + product.id.toString() + ". Quantity: " + quantity.toString());
+          // print("Product ID: " + product.id.toString() + ". Quantity: " + quantity.toString());
           return CartModel(
             id: product.id,
             name: product.name,
@@ -63,6 +64,16 @@ class CartController extends GetxController {
     update();
   }
 
+  void addToHistory() {
+    cartRepo.addToCartHistoryList();
+    clear();
+  }
+
+  void clear() {
+    _items = {};
+    update();
+  }
+
   bool isExist(ProductModel product) {
     if (_items.containsKey(product.id!)) {
       return true;
@@ -82,7 +93,12 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  int get totalItems{
+  List<CartModel> getCartData() {
+    setCartData = cartRepo.getCartList();
+    return storageItems;
+  }
+
+  int get totalQuantity{
     int totalQuantity = 0;
 
     _items.forEach((key, value) {
@@ -90,12 +106,6 @@ class CartController extends GetxController {
     });
 
     return totalQuantity;
-  }
-
-  List<CartModel> get getItems {
-    return _items.entries.map((e) {
-      return e.value;
-    }).toList();
   }
 
   int get totalAmount {
@@ -106,6 +116,20 @@ class CartController extends GetxController {
     });
 
     return total;
+  }
+
+  List<CartModel> get getItems {
+    return _items.entries.map((e) {
+      return e.value;
+    }).toList();
+  }
+
+  set setCartData(List<CartModel> items) {
+    storageItems = items;
+
+    for (int i = 0; i < storageItems.length; i++) {
+      _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+    }
   }
 
 }

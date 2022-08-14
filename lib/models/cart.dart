@@ -41,6 +41,7 @@ class CartModel {
     data['quantity'] = quantity;
     data['isExist'] = isExist;
     data['time'] = time;
+    data['product'] = product!.toJson();
     return data;
   }
 }

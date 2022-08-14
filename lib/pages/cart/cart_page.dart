@@ -9,7 +9,6 @@ import 'package:food_delivery_app/widgets/app_icon.dart';
 import 'package:food_delivery_app/widgets/bit_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 import 'package:get/get.dart';
-
 import '../../controllers/recommended_product_controller.dart';
 import '../../models/cart.dart';
 
@@ -118,7 +117,7 @@ class CartPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // controller.addItem(popularProduct);
+                  controller.addToHistory();
                 },
                 child: Container(
                   padding: EdgeInsets.only(
@@ -131,7 +130,7 @@ class CartPage extends StatelessWidget {
                     color: AppColors.mainColor,
                     borderRadius: BorderRadius.circular(Dimensions.radius(20)),
                   ),
-                  child: BigText(
+                  child: const BigText(
                     text: "Check out", // ${popularProduct.price}
                     color: Colors.white,
                   ),
@@ -191,7 +190,7 @@ class CartPage extends StatelessWidget {
                   BigText(
                     text: controller.getItems[index].name!,
                   ),
-                  SmallText(
+                  const SmallText(
                     text: "Spicy",
                   ),
                   Row(

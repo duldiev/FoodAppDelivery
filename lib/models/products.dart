@@ -86,4 +86,5 @@ class ProductModel {
     data['type_id'] = typeId;
     return data;
   }
+
 }
